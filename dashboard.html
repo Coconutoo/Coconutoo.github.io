@@ -1,0 +1,749 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TripCraft - Dashboard</title>
+    <style>
+        /* Контейнер диаграммы персонала */
+        .staff-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+            margin-top: 20px;
+        }
+
+        .staff-chart {
+            flex: 1 1 50%;
+            min-width: 300px;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+        }
+
+        .chart-wrapper {
+            position: relative;
+            height: 250px;
+            margin: 15px 0;
+        }
+
+        .chart-legend {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            font-size: 13px;
+            margin-right: 15px;
+        }
+
+        .legend-color {
+            width: 12px;
+            height: 12px;
+            border-radius: 3px;
+            margin-right: 5px;
+        }
+
+        .staff-details {
+            flex: 1 1 40%;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .detail-item {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 8px;
+            border-left: 3px solid var(--primary-color);
+        }
+
+        .detail-item h4 {
+            color: var(--primary-color);
+            margin-bottom: 8px;
+        }
+
+        .detail-item p {
+            color: #555;
+            font-size: 14px;
+        }
+
+        @media (max-width: 768px) {
+            .staff-chart,
+            .staff-details {
+                flex: 1 1 100%;
+            }
+        }
+
+        /* Карточка с диаграммой */
+        .chart-card {
+            flex: 1 1 45%;
+            min-width: 300px;
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+        }
+
+        .chart-wrapper {
+            position: relative;
+            height: 250px;
+            margin: 15px 0;
+        }
+
+        .chart-legend {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            margin-right: 15px;
+        }
+
+        .legend-color {
+            width: 15px;
+            height: 15px;
+            border-radius: 3px;
+            margin-right: 5px;
+        }
+
+        /* Дополнительная информация */
+        .audience-details {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .detail-item {
+            flex: 1 1 45%;
+            min-width: 250px;
+            background: #f9f9f9;
+            padding: 15px;
+            border-radius: 8px;
+            border-left: 4px solid #1e90ff;
+        }
+
+        .detail-item h4 {
+            color: #1e90ff;
+            margin-bottom: 10px;
+        }
+
+        .detail-item ul {
+            padding-left: 20px;
+        }
+
+        .detail-item li {
+            margin-bottom: 5px;
+        }
+
+        /* Иконки */
+        .fas {
+            color: #1e90ff;
+            margin-right: 8px;
+        }
+
+        @media (max-width: 768px) {
+            .chart-card {
+                flex: 1 1 100%;
+            }
+            .detail-item {
+                flex: 1 1 100%;
+            }
+        }
+        :root {
+            --primary-color: #1e90ff;
+            --secondary-color: #00bfff;
+            --dark-color: #333;
+            --light-color: #f5f5f5;
+            --success-color: #28a745;
+            --warning-color: #ffc107;
+        }
+        
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f8f9fa;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 20px 0;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .hero-section {
+            background: linear-gradient(135deg, #1e90ff, #00bfff);
+            color: white;
+            padding: 40px 0;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            }
+
+        .hero-text {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .hero-section h2 {
+            font-size: 28px;
+            margin-bottom: 15px;
+            color: white;
+            font-weight: 600;
+        }
+
+        .hero-subtitle {
+            font-size: 18px;
+            opacity: 0.9;
+            margin-top: 10px;
+        }
+
+        @media (max-width: 768px) {
+            .hero-section h2 {
+            font-size: 24px;
+            }
+            .hero-subtitle {
+            font-size: 16px;
+            }
+  }        
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin-left: 20px;
+        }
+        
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+        }
+        
+        .user-menu {
+            display: flex;
+            align-items: center;
+        }
+        
+        .user-menu img {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            margin-right: 10px;
+        }
+        
+        .main-content {
+            display: grid;
+            grid-template-columns: 250px 1fr;
+            gap: 20px;
+            margin-top: 20px;
+        }
+        
+        .sidebar {
+            background-color: white;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+        }
+        
+        .sidebar ul {
+            list-style: none;
+        }
+        
+        .sidebar ul li {
+            margin-bottom: 15px;
+        }
+        
+        .sidebar ul li a {
+            color: var(--dark-color);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+        }
+        
+        .sidebar ul li a i {
+            margin-right: 10px;
+            color: var(--primary-color);
+        }
+        
+        .content {
+            background-color: white;
+            border-radius: 8px;
+            padding: 30px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+        }
+        
+        h1, h2, h3 {
+            color: var(--dark-color);
+            margin-bottom: 20px;
+        }
+        
+        h1 {
+            font-size: 28px;
+            border-bottom: 2px solid var(--light-color);
+            padding-bottom: 10px;
+        }
+        
+        h2 {
+            font-size: 24px;
+            margin-top: 30px;
+            color: var(--primary-color);
+        }
+        
+        h3 {
+            font-size: 20px;
+            margin-top: 25px;
+        }
+        
+        p {
+            margin-bottom: 15px;
+        }
+        
+        ul, ol {
+            margin-bottom: 20px;
+            padding-left: 20px;
+        }
+        
+        .card {
+            background-color: var(--light-color);
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        
+        .highlight {
+            background-color: #e7f4ff;
+            padding: 15px;
+            border-left: 4px solid var(--primary-color);
+            margin: 20px 0;
+        }
+        
+        .diagram {
+            background-color: #f9f9f9;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+            text-align: center;
+        }
+        
+        .diagram img {
+            max-width: 100%;
+            height: auto;
+            margin-bottom: 15px;
+        }
+        
+        .diagram-caption {
+            font-style: italic;
+            color: #666;
+            text-align: center;
+        }
+        
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+            margin: 20px 0;
+        }
+        
+        .grid-item {
+            background-color: var(--light-color);
+            border-radius: 8px;
+            padding: 20px;
+        }
+        
+        .tag {
+            display: inline-block;
+            background-color: var(--primary-color);
+            color: white;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+            margin-right: 5px;
+            margin-bottom: 5px;
+        }
+        
+        footer {
+            text-align: center;
+            padding: 20px;
+            margin-top: 40px;
+            color: #666;
+            font-size: 14px;
+            border-top: 1px solid #eee;
+        }
+        
+        @media (max-width: 768px) {
+            .main-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .header-content {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            nav ul {
+                margin-top: 15px;
+                justify-content: center;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <header>
+        <div class="container header-content">
+            <div class="logo">TripCraft</div>
+            <nav>
+                <ul>
+                    <li><a href="#about">О проекте</a></li>
+                    <li><a href="#audience">Целевая аудитория</a></li>
+                    <li><a href="#tasks">Задачи</a></li>
+                </ul>
+            </nav>
+            <div class="user-menu">
+                <img src="https://via.placeholder.com/40" alt="User Avatar">
+                <span>Пользователь</span>
+            </div>
+        </div>
+    </header>
+
+    <section class="hero-section">
+        <div class="container">
+          <div class="hero-text">
+            <h2>Первый в России сервис с построением полного плана путешествий на основе ИИ</h2>
+            <p class="hero-subtitle">TripCraft создает персонализированные маршруты за секунды, учитывая все ваши предпочтения</p>
+          </div>
+        </div>
+    </section>
+    
+    <div class="container">
+        <div class="main-content">
+            <aside class="sidebar">
+                <ul>
+                    <li><a href="#" id="dev-link"><i class="fas fa-route"></i> Для разработчиков</a></li>
+                    <li><a href="#" id="analytics-link"><i class="fas fa-chart-line"></i> Аналитика</a></li>
+                </ul>
+            </aside>
+            
+            <main class="content">
+                
+                <section id="about">
+                    <h2>О проекте</h2>
+                    <div class="card">
+                        <h3>Название проекта: <strong>TripCraft</strong></h3>
+                        <p><strong>Цель проекта:</strong> Упростить процесс планирования поездок и подобрать оптимальные варианты по ключевым запросам пользователя.</p>
+                        <p><strong>Сроки реализации:</strong> 1 год</p>
+                        
+                        <div class="highlight">
+                            <p><strong>Аннотация:</strong> TripCraft — это платформа, состоящая из веб-сайта и мобильного приложения, предназначенная для помощи пользователям в организации путешествий. Платформа будет включать в себя функционал для поиска и бронирования билетов, отелей и развлечений, а также предоставлять рекомендации на основе предпочтений пользователей.</p>
+                        </div>
+                        
+                    </div>
+                </section>
+                
+                
+                <section id="tasks">
+                    <h2>Задачи проекта</h2>
+                    <div class="card">
+                        <ol>
+                            <li>Набрать в штат консультантов по туризму</li>
+                            <li>Обучить искусственный интеллект для систематизации ключевых слов и предпочтений пользователей</li>
+                            <li>Создать базу данных с предложениями по билетам, отелям и развлечениям</li>
+                            <li>Разработать веб-сайт и мобильное приложение</li>
+                            <li>Оформить партнерство с компаниями, предоставляющими услуги по продаже и бронированию билетов, отелей и развлечений</li>
+                        </ol>
+                    </div>
+                </section>
+                
+                <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+                <!-- Раздел "Персонал" с диаграммой -->
+                <section id="personnel">
+                    <h2>Персонал</h2>
+                    <div class="card">
+                        <div class="staff-container">
+                            <!-- Круговая диаграмма -->
+                            <div class="staff-chart">
+                                <h3><i class="fas fa-users"></i> Распределение персонала</h3>
+                                <div class="chart-wrapper">
+                                    <canvas id="staffChart"></canvas>
+                                </div>
+                                <div class="chart-legend" id="staffLegend"></div>
+                            </div>
+                            <!-- Дополнительная информация -->
+                            <div class="staff-details">
+                                <div class="detail-item">
+                                    <h4><i class="fas fa-code"></i> Разработчики</h4>
+                                    <p>Frontend, Backend, Mobile разработка и Data Science</p>
+                                </div>
+                                <div class="detail-item">
+                                    <h4><i class="fas fa-headset"></i> Консультанты</h4>
+                                    <p>Профессиональные гиды с экспертизой в 15+ странах</p>
+                                </div>
+                                <div class="detail-item">
+                                    <h4><i class="fas fa-paint-brush"></i> Дизайнеры</h4>
+                                    <p>UI/UX специалисты и графические дизайнеры</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Стили для раздела -->
+                <style>
+                    .staff-container {
+                        display: flex;
+                        flex-wrap: wrap;
+                        gap: 30px;
+                    }
+
+                    .staff-chart {
+                        flex: 1 1 50%;
+                        min-width: 300px;
+                        background: white;
+                        padding: 20px;
+                        border-radius: 10px;
+                        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+                    }
+
+                    .staff-details {
+                        flex: 1 1 40%;
+                        display: flex;
+                        flex-direction: column;
+                        gap: 15px;
+                    }
+
+                    .detail-item {
+                        background: #f8f9fa;
+                        padding: 15px;
+                        border-radius: 8px;
+                        border-left: 3px solid #1e90ff;
+                    }
+
+                    .detail-item h4 {
+                        color: #1e90ff;
+                        margin-bottom: 8px;
+                    }
+
+                    .detail-item p {
+                        color: #555;
+                        font-size: 14px;
+                    }
+
+                    @media (max-width: 768px) {
+                        .staff-chart, .staff-details {
+                            flex: 1 1 100%;
+                        }
+                    }
+
+                    /* Общие стили для диаграмм (можно вынести в общий CSS) */
+                    .chart-wrapper {
+                        position: relative;
+                        height: 250px;
+                        margin: 15px 0;
+                    }
+
+                    .chart-legend {
+                        display: flex;
+                        flex-wrap: wrap;
+                        justify-content: center;
+                        gap: 10px;
+                        margin-top: 15px;
+                    }
+
+                    .legend-item {
+                        display: flex;
+                        align-items: center;
+                        margin-right: 15px;
+                        font-size: 13px;
+                    }
+
+                    .legend-color {
+                        width: 12px;
+                        height: 12px;
+                        border-radius: 3px;
+                        margin-right: 5px;
+                    }
+                </style>
+
+                <!-- Скрипт для диаграммы персонала -->
+                <script>
+                    document.addEventListener('DOMContentLoaded', function() {
+                        // Диаграмма распределения персонала
+                        const staffCtx = document.getElementById('staffChart');
+                        const staffChart = new Chart(staffCtx, {
+                            type: 'pie',
+                            data: {
+                                labels: ['Разработчики', 'Консультанты', 'Дизайнеры', 'Проджекты', 'SMM'],
+                                datasets: [{
+                                    data: [40, 20, 20, 10, 10],
+                                    backgroundColor: [
+                                        '#1e90ff', // Синий - разработчики
+                                        '#ff6384', // Розовый - консультанты
+                                        '#ffce56', // Желтый - дизайнеры
+                                        '#4bc0c0', // Бирюзовый - проджекты
+                                        '#9966ff'  // Фиолетовый - SMM
+                                    ],
+                                    borderWidth: 1
+                                }]
+                            },
+                            options: {
+                                responsive: true,
+                                maintainAspectRatio: false,
+                                plugins: {
+                                    legend: {
+                                        display: false
+                                    },
+                                    tooltip: {
+                                        callbacks: {
+                                            label: function(context) {
+                                                return `${context.label}: ${context.raw}%`;
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        });
+
+                        // Кастомная легенда
+                        createStaffLegend();
+
+                        function createStaffLegend() {
+                            const legendContainer = document.getElementById('staffLegend');
+                            const labels = staffChart.data.labels;
+                            const colors = staffChart.data.datasets[0].backgroundColor;
+                            const values = staffChart.data.datasets[0].data;
+
+                            labels.forEach((label, i) => {
+                                const legendItem = document.createElement('div');
+                                legendItem.className = 'legend-item';
+                                
+                                const colorBox = document.createElement('div');
+                                colorBox.className = 'legend-color';
+                                colorBox.style.backgroundColor = colors[i];
+                                
+                                const text = document.createElement('span');
+                                text.textContent = `${label}: ${values[i]}%`;
+                                
+                                legendItem.appendChild(colorBox);
+                                legendItem.appendChild(text);
+                                legendContainer.appendChild(legendItem);
+                            });
+                        }
+                    });
+                </script>
+                
+                <section id="marketing">
+                    <h2>Маркетинг (4P)</h2>
+                    <div class="card">
+                        <div class="grid">
+                            <div class="grid-item">
+                                <h4>Product (Продукт)</h4>
+                                <p>Уникальное сочетание ИИ-планировщика и человеческой экспертизы в создании индивидуальных маршрутов</p>
+                            </div>
+                            <div class="grid-item">
+                                <h4>Price (Цена)</h4>
+                                <p>Бесплатный базовый функционал + платные премиум-консультации с гидами</p>
+                            </div>
+                            <div class="grid-item">
+                                <h4>Place (Место)</h4>
+                                <p>Веб-платформа и мобильное приложение с интеграцией в социальные сети</p>
+                            </div>
+                            <div class="grid-item">
+                                <h4>Promotion (Продвижение)</h4>
+                                <p>Целевая реклама в соцсетях, партнерские программы с блогерами, контент-маркетинг</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                
+                <section id="swot">
+                    <h2>SWOT-анализ</h2>
+                    <div class="card">
+                        <div class="grid">
+                            <div class="grid-item">
+                                <h4>Strengths (Сильные стороны)</h4>
+                                <ul>
+                                    <li>Уникальное сочетание ИИ и экспертов</li>
+                                    <li>Персонализированные предложения</li>
+                                    <li>Экономия времени пользователя</li>
+                                </ul>
+                            </div>
+                            <div class="grid-item">
+                                <h4>Weaknesses (Слабые стороны)</h4>
+                                <ul>
+                                    <li>Зависимость от партнеров</li>
+                                    <li>Необходимость постоянного обновления базы</li>
+                                    <li>Высокие затраты на старте</li>
+                                </ul>
+                            </div>
+                            <div class="grid-item">
+                                <h4>Opportunities (Возможности)</h4>
+                                <ul>
+                                    <li>Расширение на международные рынки</li>
+                                    <li>Дополнительные сервисы (страхование, визы)</li>
+                                    <li>Корпоративный сегмент</li>
+                                </ul>
+                            </div>
+                            <div class="grid-item">
+                                <h4>Threats (Угрозы)</h4>
+                                <ul>
+                                    <li>Конкуренция с крупными агрегаторами</li>
+                                    <li>Изменения в законодательстве</li>
+                                    <li>Экономические кризисы</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                
+
+    <footer>
+        <div class="container">
+            <p>© 2025 TripCraft. Все права защищены.</p>
+            <p>Контактная информация: info@tripcraft.com | 8 (800) 535-35-35</p>
+        </div>
+    </footer>
+
+    <script src="develop.js"></script>
+</body>
+</html>

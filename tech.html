@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TripCraft - Техническая документация</title>
+    <style>
+        /* Используем стили из dashboard.html */
+        :root {
+            --primary-color: #1e90ff;
+            --secondary-color: #00bfff;
+            --dark-color: #333;
+            --light-color: #f5f5f5;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #fcfcfc;
+            margin: 0;
+            padding: 0;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 20px 0;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        h1, h2, h3 {
+            color: var(--dark-color);
+        }
+        
+        h1 {
+            font-size: 28px;
+            border-bottom: 2px solid var(--light-color);
+            padding-bottom: 10px;
+            margin-bottom: 30px;
+        }
+        
+        h2 {
+            color: var(--primary-color);
+            margin-top: 40px;
+        }
+        
+        .diagram-container {
+            background: white;
+            border-radius: 8px;
+            padding: 30px;
+            margin: 20px 0;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        }
+        
+        .diagram {
+            max-width: 100%;
+            border: 1px solid #eee;
+            margin: 20px 0;
+        }
+        
+        .back-btn {
+            display: inline-block;
+            background: var(--primary-color);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            margin-top: 20px;
+        }
+        
+        footer {
+            text-align: center;
+            padding: 30px 0;
+            margin-top: 50px;
+            border-top: 1px solid #eee;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container header-content">
+            <div>
+                <a href="dashboard.html" class="back-btn">
+                    <i class="fas fa-arrow-left"></i> На главную
+                </a>
+                <h1>Для разработчиков</h1>
+            </div>
+        </div>
+    </header>
+    
+    <div class="container">
+        <section id="structural">           
+            <div class="diagram-container">
+                <h3>Диаграмма классов</h3>
+                <img src="поилод.png" alt="Диаграмма классов" class="diagram">
+                <p>Отображает ключевые сущности системы: Пользователь, Путешествие, Билет, Отель, Развлечение, Рекомендация и связи между ними. Показывает, какие данные хранятся (например, дата бронирования, цена, рейтинг) и как они взаимодействуют. Используется для проектирования базы данных и бизнес-логики.</p>
+            </div>
+            
+            <div class="diagram-container">
+                <h3>Диаграмма компонентов</h3>
+                <img src="ноа.png" alt="Диаграмма компонентов" class="diagram">
+                <p>Показывает физические компоненты системы: веб-интерфейс, мобильное приложение, сервер API, базу данных.</p>
+            </div>
+
+            <div class="diagram-container">
+                <h3>Диаграмма пакетов</h3>
+                <img src="пакеты.png" alt="Диаграмма пакетов" class="diagram">
+                <p>Группирует классы и компоненты в логические модули:Бронирование (билеты, отели), Рекомендации, Пользователи, Платежи. Помогает избежать хаоса в коде и соблюдать принцип разделения ответственности.</p>
+            </div>
+
+            <div class="diagram-container">
+                <h3>Диаграмма развертывания</h3>
+                <img src="развертывание.png" alt="Диаграмма развертывания" class="diagram">
+                <p>Серверы, БД и устройства пользователей. Используется для планирования деплоя, масштабирования и распределения нагрузки.</p>
+            </div>
+
+            <div class="diagram-container">
+                <h3>Диаграмма композитной структуры</h3>
+                <img src="композитной структуры.png" alt="Диаграмма композитной структуры" class="diagram">
+                <p>Внутреннее устройство сложных компонентов (например, сервиса бронирования).</p>
+            </div>
+
+            <div class="diagram-container">
+                <h3>Поведенческая диаграмма</h3>
+                <img src="1.png" alt="Поведенческая диаграмма" class="diagram" style="display: block;">
+                <img src="2.png" class="diagram" style="display: block;">
+                <img src="3.png" class="diagram" style="display: block;">
+                <img src="4.png" class="diagram" style="display: block;">
+                <p>Общее описание динамики работы системы. Используется для моделирования бизнес-процессов и сценариев взаимодействия.</p>
+            </div>
+
+            <div class="diagram-container">
+                <h3>Временная диаграмма</h3>
+                <img src="временная диаграмма.png" alt="Временная диаграмма" class="diagram">
+                <p>Длительность критичных процессов (поиск отелей, оплата).</p>
+            </div>
+
+            <div class="diagram-container">
+                <h3>Диаграмма последовательности</h3>
+                <img src="последовательность 1.png" alt="Диаграмма последовательности" class="diagram" style="display: block;">
+                <img src="последовательность 2.png" class="diagram" style="display: block;">
+                <img src="последовательность 3.png" class="diagram" style="display: block;">
+                <p>Пошаговые сценарии (бронирование: запрос → поиск → оплата).</p>
+            </div>
+
+            <div class="diagram-container">
+                <h3>Диаграмма объектов</h3>
+                <img src="диаграмма объектов.png" alt="Диаграмма объектов" class="diagram">
+                <p>Снимок данных в конкретный момент (например, бронь пользователя Х).</p>
+            </div>
+
+            <div class="diagram-container">
+                <h3>Диаграмма состояний</h3>
+                <img src="диаграмма состояний.png" alt="Диаграмма состояний" class="diagram">
+                <p>Жизненный цикл сущностей (статус брони: ожидание → оплата → подтверждение).</p>
+            </div>
+
+            <div class="diagram-container">
+                <h3>Диаграмма обзора взаимодействия</h3>
+                <img src="диаграмма обзора и взаимодействия 1.png" alt="Диаграмма обзора взаимодействия" class="diagram" style="display: block;">
+                <img src="диаграмма обзора и взаимодействия 2.png" class="diagram" style="display: block;">
+                <p>Связь сценариев (поиск → фильтрация → бронь).</p>
+            </div>
+
+            <div class="diagram-container">
+                <h3>Диаграмма коммуникации</h3>
+                <img src="диаграмма коммуникации 1.png" alt="Диаграмма коммуникации" class="diagram" style="display: block;">
+                <img src="диаграмма коммуникации 2.png" class="diagram" style="display: block;">
+                <p>Роли и их взаимодействие (Гость: поиск; Пользователь: бронь+рекомендации).</p>
+            </div>
+            
+        </section>
+        
+        <a href="dashboard.html" class="back-btn">← Вернуться на главную</a>
+    </div>
+    
+    <footer>
+        <div class="container">
+            <p>© 2025 TripCraft. Все права защищены.</p>
+        </div>
+    </footer>
+</body>
+</html>
